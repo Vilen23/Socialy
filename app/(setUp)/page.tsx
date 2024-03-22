@@ -1,8 +1,10 @@
+
 import React from 'react'
 import { initialUser } from '@/lib/initial-profile'
 import { db } from '@/lib/db'
 import { redirect } from 'next/navigation';
-
+import { InitialModal } from '@/components/modals/initial-modal';
+import { motion } from 'framer-motion';
 const SetupPage = async() => {
     const profile = await initialUser();
     const servers = await db.server.findFirst({
@@ -21,7 +23,7 @@ const SetupPage = async() => {
 
     return (
         <div>
-            Create a server
+            <InitialModal/>
         </div>
   )
 }
