@@ -7,18 +7,19 @@ import { InitialModal } from '@/components/modals/initial-modal';
 import { motion } from 'framer-motion';
 const SetupPage = async() => {
     const profile = await initialUser();
+    console.log(profile)
     const servers = await db.server.findFirst({
         where:{
             Members:{
                 some:{
-                    id:profile.id
+                    profileId:profile.id
                 }
             }
         }
     })
 
     if(servers){
-        return redirect(`/server/${servers.id}`)
+        return redirect(`/servers/${servers.id}`)
     }
 
     return (

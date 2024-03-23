@@ -19,9 +19,11 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import FileUpload from "@/components/file-upload";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -33,10 +35,12 @@ const formSchema = z.object({
 });
 
 export const InitialModal = () => {
-  const [isMounted,setIsMounted] = useState(false);
-  useEffect(()=>{
-    setIsMounted(true)
-  },[])
+  const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -49,10 +53,17 @@ export const InitialModal = () => {
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try {
+      await axios.post("/api/servers",values);
+      form.reset();
+      router.refresh();
+      window.location.reload();
+    } catch (error) {
+      console.log(error)
+    }
   };
 
-  if(!isMounted){
+  if (!isMounted) {
     return null;
   }
 
@@ -72,7 +83,21 @@ export const InitialModal = () => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="space-y-8 px-6">
               <div className="flex items-center justify-center text-center">
-                TODO:Image Upload
+                <FormField
+                  control={form.control}
+                  name="imageUrl"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <FileUpload
+                          endpoint="serverImage"
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
               </div>
               <FormField
                 control={form.control}
@@ -97,16 +122,16 @@ export const InitialModal = () => {
             </div>
             <DialogFooter className="bg-gray-100 px-6 py-4">
               <motion.button
-                initial={{ scale: 0, opacity: 0, backgroundColor: "red" }}
-                animate={{ scale: 1, opacity: 1, backgroundColor: "indigo" }}
+                initial={{ scale: 0, opacity: 0,x:900  }}
+                animate={{ scale: 1, opacity: 1,x:0 }}
                 transition={{ duration: 1, ease: "backInOut" }}
                 whileHover={{
                   scale: 1.06,
                   transition: { duration: 0.4, ease: "easeInOut" },
                 }}
-                whileTap={{ scale: 0.9, transition: { duration: 0.2 }}}
+                whileTap={{ scale: 0.9, transition: { duration: 0.2 } }}
                 disabled={isLoading}
-                className="bg-indigo-500 text-white hover:bg-indigo-500/90 py-3 rounded-xl px-4 font-bold text-lg"
+                className="bg-blue-700 text-white hover:bg-blue-700/90 py-3 rounded-xl px-4 font-bold text-lg"
               >
                 Create
               </motion.button>
