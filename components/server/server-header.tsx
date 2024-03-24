@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useModal } from "@/hooks/use-modal-store";
+import { ServerInfoAtom } from "@/State/Server-info/ServerAtom";
 
 interface ServerHeaderProps {
   server: ServerWithMembersWithProfiles;
@@ -31,6 +32,10 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
   const moderator = isAdmin || role === MemberRole.MODERATOR;
   const {onOpen} = useModal();
 
+
+  const HandleServerSettings = ()=>{
+    onOpen("editServer",{server})
+  }
 
   return (
     <motion.div
@@ -59,13 +64,16 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
             </DropdownMenuItem>
           )}
           {isAdmin && (
-            <DropdownMenuItem className="px-3 py-2 text-xs cursor ">
+            <DropdownMenuItem 
+            onClick={HandleServerSettings}
+            className="px-3 py-2 text-xs cursor ">
               Server Settings
               <Settings className="ml-auto h-4 w-4" />
             </DropdownMenuItem>
           )}
           {isAdmin && (
-            <DropdownMenuItem className="px-3 py-2 text-xs cursor">
+            <DropdownMenuItem onClick={()=>onOpen("members",{server})}
+            className="px-3 py-2 text-xs cursor">
               Manage Members
               <Users className="ml-auto h-4 w-4" />
             </DropdownMenuItem>

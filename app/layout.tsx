@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -5,7 +6,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 import { cn } from "@/lib/utils";
 import { ModalProvider } from "@/components/provider/modal-provider";
-
+import { RecoilRoot } from "recoil";
 const font = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -25,7 +26,9 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true} storageKey="theme"
           >
             <ModalProvider/>
+            
             {children}
+
             </ThemeProvider>
         </body>
       </html>

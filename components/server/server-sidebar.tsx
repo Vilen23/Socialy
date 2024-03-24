@@ -43,7 +43,7 @@ const ServerSidebar =  async({serverId}:{serverId:string}) => {
   return (
     <div className='flex flex-col h-full text-black dark:text-white w-full dark:bg-[#2B2D31] bg-[#F2F3F5]  '>
       <ServerHeader
-        server={{...server, members}}
+        server={server}
         role={role}
       />
     </div>
