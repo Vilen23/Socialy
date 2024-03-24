@@ -69,27 +69,53 @@ export const InitialModal = () => {
 
   return (
     <Dialog open>
-      <DialogContent className="bg-white text-black p-0 overflow-hidden">
+      <DialogContent className="bg-[#1E1F22] border-[#313338] text-white p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="font-bold text-center text-2xl">
-            Customize Your Server
+            <motion.p
+              initial={{ scale: 0, opacity: 0, x: -400 }}
+              animate={{ scale: 1, opacity: 1, x: [-400, 0] }}
+              transition={{
+                duration: 0.5,
+                type: "spring",
+                damping: 10,
+                stiffness: 100,
+              }}
+            >
+              Customize Your Server
+            </motion.p>
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
+            <motion.p
+            initial={{ scale: 0, opacity: 0, x: 400 }}
+            animate={{ scale: 1, opacity: 1, x: [400, 0] }}
+            transition={{
+              duration: 0.5,
+              type: "spring",
+              damping: 10,
+              stiffness: 100,
+            }}
+            >
             Give Your server a personality with a name and image. You can always
             Change it later.
+            </motion.p>
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="space-y-8 px-6">
-              <div className="flex items-center justify-center text-center">
+            <div className="space-y-8  px-6">
+              <motion.div 
+              initial={{ scale: 0, opacity: 0, }}
+              animate={{ scale: [0,0.2,0.3,1], opacity: 1, }}
+              transition={{ duration: 0.5,type: "spring", damping: 10, stiffness: 100 }}
+              className="flex items-center justify-center text-center">
                 <FormField
                   control={form.control}
                   name="imageUrl"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <FileUpload
+                      <FileUpload
                           endpoint="serverImage"
                           value={field.value}
                           onChange={field.onChange}
@@ -98,7 +124,13 @@ export const InitialModal = () => {
                     </FormItem>
                   )}
                 />
-              </div>
+              </motion.div>
+              <motion.div
+              initial={{ scale: 0, opacity: 0,y:900 }}
+              animate={{ scale: 1, opacity: 1,y:0 }}
+              transition={{ duration: 0.5,ease: "easeInOut",}}
+              whileTap={{x:20}}
+              >
               <FormField
                 control={form.control}
                 name="name"
@@ -110,7 +142,7 @@ export const InitialModal = () => {
                     <FormControl>
                       <Input
                         disabled={isLoading}
-                        className="bg-zinc-300/50 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                        className="bg-[#313338] border-0 focus-visible:ring-0 text-white focus-visible:ring-offset-0"
                         placeholder="Enter server name"
                         {...field}
                       />
@@ -119,19 +151,24 @@ export const InitialModal = () => {
                   </FormItem>
                 )}
               />
+              </motion.div>
             </div>
-            <DialogFooter className="bg-gray-100 px-6 py-4">
+            <DialogFooter className=" px-6 py-4">
               <motion.button
-                initial={{ scale: 0, opacity: 0,x:900  }}
-                animate={{ scale: 1, opacity: 1,x:0 }}
-                transition={{ duration: 1, ease: "backInOut" }}
+                initial={{ scale: 0, opacity: 0, x: 900 }}
+                animate={{ scale: 1, opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, ease: "backInOut" }}
                 whileHover={{
                   scale: 1.06,
+                  background:"white",
+                  color:"black",
                   transition: { duration: 0.4, ease: "easeInOut" },
+
                 }}
                 whileTap={{ scale: 0.9, transition: { duration: 0.2 } }}
+                
                 disabled={isLoading}
-                className="bg-blue-700 text-white hover:bg-blue-700/90 py-3 rounded-xl px-4 font-bold text-lg"
+                className="bg-[#313338] text-white py-3 rounded-xl px-4 w-full font-bold text-lg"
               >
                 Create
               </motion.button>

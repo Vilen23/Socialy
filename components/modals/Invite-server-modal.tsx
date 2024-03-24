@@ -18,7 +18,7 @@ import axios from "axios";
 export const InviteModal = () => {
   const origin = useOrigin();
   const { onOpen, isOpen, onClose, type, data } = useModal();
-  const { server } = data;
+  const server = data?.server;
   const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -66,13 +66,24 @@ export const InviteModal = () => {
           </DialogTitle>
         </DialogHeader>
         <div className="p-6">
-          <Label className="uppercase text-xs font-bold text-zinc-500 dark:text-white/70">
-            Server Invite Link
-          </Label>
-          <div className="flex items-center mt-2 gap-x-2">
+          <motion.div
+          initial={{scale:0,opacity:0,x:-500}}
+          animate={{scale:1,opacity:1,x:[-500,0]}}
+          transition={{duration:0.5,type:"spring",damping:10,stiffness:100}}
+          >
+            <Label className="uppercase text-xs font-bold text-zinc-500 dark:text-white/70">
+              Server Invite Link
+            </Label>
+          </motion.div>
+          <motion.div 
+          initial={{scale:0,opacity:0,x:500,y:500}}
+          animate={{scale:1,opacity:1,x:[500,0],y:[500,0]}}
+          transition={{duration:0.5,type:"spring",damping:10,stiffness:100}}
+          className="flex items-center mt-2 gap-x-2">
             <Input
               disabled={isLoading}
               value={inviteUrl}
+              readOnly
               className="bg-white/90 border-0 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
             />
             <Button size="icon" onClick={onCopy} disabled={isLoading}>
@@ -82,7 +93,12 @@ export const InviteModal = () => {
                 <Copy className="w-4 h-4" />
               )}
             </Button>
-          </div>
+          </motion.div>
+          <motion.div
+          initial={{scale:0,opacity:0,x:-500,y:-500}}
+          animate={{scale:1,opacity:1,x:[-500,0],y:[-500,0]}}
+          transition={{duration:0.5,type:"spring",damping:10,stiffness:100}}
+          >
           <Button
             onClick={onNew}
             disabled={isLoading}
@@ -93,6 +109,7 @@ export const InviteModal = () => {
             Generate New Link
             <RefreshCw className="w-4 h-4 ml-2" />
           </Button>
+          </motion.div>
         </div>
       </DialogContent>
     </Dialog>
