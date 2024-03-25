@@ -19,13 +19,14 @@ import { useModal } from "@/hooks/use-modal-store";
 import { ServerWithMembersWithProfiles } from "@/types";
 import { Loader2 } from "lucide-react";
 
-export const DeleteServerModal = () => {
+export const DeleteChannelModal = () => {
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
-  const isModalOpen = isOpen && type === "deleteServer";
+  const isModalOpen = isOpen && type === "deleteChannel";
   const { server } = (data as { server: ServerWithMembersWithProfiles }) || {
     server: undefined,
   };
+  const {channel} = data;
   const [isMounted, setIsMounted] = useState(false);
   const form = useForm();
   const isLoading = form.formState.isSubmitting;
@@ -35,16 +36,22 @@ export const DeleteServerModal = () => {
 
   const onSubmit = async () => {
     try {
+      if(!channel) {
+        console.log("Channel not found");
+        return;
+      }
+      const channelId = channel.id;
       const url = qs.stringifyUrl({
-        url: `/api/servers/deleteServer`,
+        url: `/api/channels/${channelId}`,
         query: {
           serverId: server.id,
         },
       });
-      await axios.post(url);
-      form.reset();
-      router.refresh();
+      await axios.patch(url);
+      router.push("/");
+      window.location.reload();
       onClose();
+      router.refresh();
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +76,7 @@ export const DeleteServerModal = () => {
                 stiffness: 100,
               }}
             >
-              Delete Server ?
+              Delete Channel ?
             </motion.p>
           </DialogTitle>
           <DialogDescription className="text-center text-zinc-500">
@@ -83,7 +90,7 @@ export const DeleteServerModal = () => {
                 stiffness: 100,
               }}
             >
-              Are you sure you want to Delete this server ?
+              Are you sure you want to Delete this channel ?
             </motion.p>
           </DialogDescription>
         </DialogHeader>
