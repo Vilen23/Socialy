@@ -25,7 +25,7 @@ const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
         <motion.div
           initial={{ scale: 0, opacity: 0, x: -100 }}
           animate={{ scale: 1, opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, ease: "backInOut", delay: 0.3 }}
+          transition={{ duration:0.2, ease: "easeInOut" }}
           className={cn(
             "absolute left-0 bg-[#313338] dark:bg-white rounded-full transition-all w-[4px]",
             params?.serverId !== id && "group-hover:h-[20px]",
@@ -37,7 +37,7 @@ const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
         <motion.div
           initial={{ scale: 0, opacity: 0, x: -100 }}
           animate={{ scale: 1, opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, ease: "backInOut", delay: 0.3 }}
+          transition={{ duration:0.2, ease: "easeInOut" }}
           // whileInView={{boxShadow:"0 5px 10px black"}}
           className={cn(
             "relative group flex mx-3  h-[48px] w-[48px] rounded-[24px]  group-hover:rounded-[16px] transition-all overflow-hidden shadow-md",

@@ -13,7 +13,7 @@ const NavigationAction = () => {
     <motion.div
     initial={{scale:0,opacity:0,y:-100}}
     animate={{scale:1,opacity:1,y:0}}
-    transition={{duration:0.5,ease:"easeInOut"}}
+    transition={{duration:0.2,ease:"easeInOut"}}
     >
       <ActionToolTip
       side='right'

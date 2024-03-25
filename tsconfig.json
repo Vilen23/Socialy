@@ -6,7 +6,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/page.tsx"
-  ],
+, "components/ui/command.tsx"  ],
   // ...
   "compilerOptions": {
     "lib": [

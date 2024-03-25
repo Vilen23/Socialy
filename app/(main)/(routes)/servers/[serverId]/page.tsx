@@ -1,9 +1,10 @@
+import { CommandDemo } from '@/components/server/test'
 import React from 'react'
 
 const ServerIdPage = () => {
   return (
     <div>
-      Server id page
+      Serevr id
     </div>
   )
 }

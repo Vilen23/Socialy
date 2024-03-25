@@ -76,11 +76,13 @@ export const CreateChannelModal = () => {
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="font-bold text-center text-2xl">
             <motion.p
-              initial={{ scale: 0, opacity: 0, x: -400 }}
-              animate={{ scale: 1, opacity: 1, x: [-400, 0] }}
+              initial={{ opacity: 0, x: -400 }}
+              animate={{  opacity: 1, x: [-400, 0] }}
               transition={{
-                duration: 0.5,
-                ease: "easeInOut"
+                duration: 0.2,
+                type: "spring",
+                damping: 20,
+                stiffness: 100,
               }}
             >
               Create Channel
@@ -90,10 +92,16 @@ export const CreateChannelModal = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="space-y-8 px-6">
+              <div>
               <motion.div
-              initial={{ scale: 0, opacity: 0,x:400 }}
-              animate={{ scale: 1, opacity: 1,x:[400,0] }}
-              transition={{ duration: 0.5,ease: "easeInOut",}}
+              initial={{ opacity: 0,x:400 }}
+              animate={{  opacity: 1,x:[400,0] }}
+              transition={{
+                duration: 0.2,
+                type: "spring",
+                damping: 20,
+                stiffness: 100,
+              }}
               >
               <FormField
                 control={form.control}
@@ -115,7 +123,17 @@ export const CreateChannelModal = () => {
                   </FormItem>
                 )}
               />
-              <div className="mt-3">
+              </motion.div>
+              <motion.div 
+              initial={{ opacity: 0,x:-400 }}
+              animate={{  opacity: 1,x:[-400,0] }}
+              transition={{
+                duration: 0.2,
+                type: "spring",
+                damping: 20,
+                stiffness: 100,
+              }}
+              className="mt-3">
               <FormField control={form.control} name="type" render={({field})=>(
                 <FormItem>
                   <FormLabel className="uppercase text-xs text-zinc-500 font-bold dark:text-secondary/70">CHANNEL TYPE</FormLabel>
@@ -140,14 +158,19 @@ export const CreateChannelModal = () => {
                       <FormMessage/>
                 </FormItem>
               )}/>
-              </div>
               </motion.div>
+              </div>
             </div>
             <DialogFooter className=" px-6 py-4">
               <motion.button
-                initial={{ scale: 0, opacity: 0, y: 400 }}
-                animate={{ scale: 1, opacity: 1, y: [400,0] }}
-                transition={{ duration: 0.5, ease: "backInOut" }}
+                initial={{ opacity: 0, y: 400 }}
+                animate={{  opacity: 1, y: [400,0] }}
+                transition={{
+                  duration: 0.2,
+                  type: "spring",
+                  damping: 20,
+                  stiffness: 100,
+                }}
                 whileHover={{
                   scale: 1.06,
                   background:"white",
