@@ -16,7 +16,7 @@ const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
   const router = useRouter();
 
   const onClick = () => {
-    window.location.href = `/servers/${id}`;
+    router.push(`/servers/${id}`)
   };
 
   return (

@@ -25,8 +25,13 @@ export const ServerMember = ({ member, server }: ServerMemberProps) => {
 
   const icon = roleIconMap[member.role];
 
+  const onClick = ()=>{
+    router.push(`/servers/${params?.serverId}/conversations/${member.id}`)
+  }
+
   return (
     <motion.button
+    onClick={onClick}
       initial={{ scale: 0.95, x: 300 }}
       animate={{ scale: 1, x: 0 }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
