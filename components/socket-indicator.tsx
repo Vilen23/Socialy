@@ -12,7 +12,7 @@ export const SocketIndicator = () => {
         variant="outline" 
         className="bg-yellow-600 text-white border-none"
       >
-        Bad Connection
+        Using Fallback
       </Badge>
     )
   }
@@ -22,7 +22,7 @@ export const SocketIndicator = () => {
       variant="outline" 
       className="bg-emerald-600 text-white border-none font-semibold"
     >
-        Connected
+        WebSocket:Live
     </Badge>
   )
 }

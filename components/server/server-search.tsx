@@ -120,7 +120,7 @@ const ServerSearch = ({ data }: ServerSearchProps) => {
             return (
               <CommandGroup key={label} heading={label}>
                 {data?.map(({ id, icon, name }) => (
-                  <motion.div
+                  <motion.div key={id}
                     initial={{ scale: 0.95, x: 400 }}
                     animate={{ scale: 1, x: 0 }}
                     transition={{

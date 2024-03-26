@@ -45,7 +45,7 @@ const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
             "dark:shadow-black","shadow-gray-600"
           )}
         >
-          <Image fill objectFit="cover"  src={imageUrl} alt="Channel" />
+          <Image fill  src={imageUrl} alt="Channel" />
         </motion.div>
       </button>
     </ActionToolTip>

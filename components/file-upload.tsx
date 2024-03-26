@@ -19,7 +19,6 @@ const FileUpload = ({ onChange, value, endpoint }: FileUploadProps) => {
         <Image
           src={value}
           layout="fill"
-          objectFit="cover"
           alt="upload"
           className="rounded-full"
         />
